@@ -6,17 +6,31 @@ describe('logging in with the data from fixture', () => {
         cy.visit('/')
     })
     
-    it('should register and log in', () => {
+
+   
+    it('should register the user', () => {
         cy.fixture('credential').then((data)=>{
             const {firstName, lastName, email, password, passwordConfirm} = data.userData;
-            RegisterNewuser.registerPage()
-            RegisterNewuser.registerUser(firstName, lastName, email, password, passwordConfirm)
-            RegisterNewuser.saveNewUser()
-
-            cy.get('a').contains('Continue').click()
-            Login.loginPage()
-            Login.loginUser(email, password)
-            Login.loginNewUser()
-        })
+                RegisterNewuser.RegisterPage()
+                RegisterNewuser.RegisterUser(firstName, lastName, email, password, passwordConfirm)  
+        })   
     })
+
+    it('save the user', () => {
+        RegisterNewuser.SaveNewUser()
+    })
+
+    it('user should login', () => {
+        cy.fixture('credential').then((data) => {
+            const {email, password} = data.userData;
+            cy.get('a').contains('Continue').click()
+                Login.LoginPage()
+                Login.LoginUser(email, password)
+        })
+       
+    })
+
+    it('successfully login', () => {
+        Login.LoginNewUser()
+    })          
 })

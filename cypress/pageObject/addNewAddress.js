@@ -1,6 +1,6 @@
-export class addNewAD {
+export class AddNewAD {
 
-    static address() {
+    static Address() {
         cy.get('a[href="/customer/addresses"]').click({ multiple: true })
         cy.get('.page-title').should('have.text', 'My account - Addresses')
 
@@ -8,18 +8,18 @@ export class addNewAD {
         cy.get('.page-title').should('have.text', 'My account - Add new address')
     }
 
-    static emptyAddress() {
+    static EmptyAddress() {
         cy.get('button').contains('Save').click()
-        cy.get('#Address_FirstName-error').contains('First name is required.').should('be.visible') 
-        cy.get('#Address_LastName-error').contains('Last name is required.').should('be.visible')
-        cy.get('#Address_Email-error').contains('Email is required.').should('be.visible')
-        cy.get('#Address_City-error').contains('City is required').should('be.visible')
-        cy.get('#Address_Address1-error').contains('Street address is required').should('be.visible')
-        cy.get('#Address_ZipPostalCode-error').contains('Zip / postal code is required').should('be.visible')
-        cy.get('#Address_PhoneNumber-error').contains('Phone is required.').should('be.visible')
+
+        const id  = ['#Address_FirstName-error', '#Address_LastName-error', '#Address_Email-error', '#Address_City-error', '#Address_Address1-error', '#Address_ZipPostalCode-error', '#Address_PhoneNumber-error']
+        const message = ['First name is required.', 'Last name is required.', 'Email is required.', 'City is required', 'Street address is required', 'Zip / postal code is required', 'Phone is required']
+
+        for (let i in id) {
+            cy.get(id[i]).contains(message[i]).should('be.visible')
+        }
     }
 
-    static newAddress(firstName, lastName, email, country, city, address1, postalCode, pNumber) {
+    static AewAddress(firstName, lastName, email, country, city, address1, postalCode, pNumber) {
         cy.get('#Address_FirstName').type(firstName)
         cy.get('#Address_LastName').type(lastName)
         cy.get('#Address_Email').type(email)
@@ -30,7 +30,7 @@ export class addNewAD {
         cy.get('#Address_PhoneNumber').type(pNumber)
     }
 
-    static saveBtn() {
+    static SaveBtn() {
         cy.get('button').contains('Save').click()
         cy.get('#bar-notification').contains('The new address has been added successfully.').should('be.visible')
     }

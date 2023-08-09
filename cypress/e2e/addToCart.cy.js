@@ -1,5 +1,5 @@
-import { addToCart } from "../pageObject/addToCart";
-import { checkOutB } from "../pageObject/checkOut";
+import { AddToCart } from "../pageObject/addToCart";
+import { CheckOutB } from "../pageObject/checkOut";
 import { Login } from "../pageObject/loginPage";
 describe('search for book and add to cart', () => {
     it('should visit the site home', () => {
@@ -7,7 +7,7 @@ describe('search for book and add to cart', () => {
     })
 
     it('enter the names of the book', () => {
-        addToCart.searchBook('First Prize Pies')
+        AddToCart.SearchBook('First Prize Pies')
     })
 
     // it('write the count of the book', () => {
@@ -15,19 +15,19 @@ describe('search for book and add to cart', () => {
     // })
 
     it('add the book to the cart', () => {
-        addToCart.cartBtn()
+        AddToCart.CartBtn()
     })
 
     it('should go to the shopping cart', () => {
-        checkOutB.cartList()
+        CheckOutB.CartList()
     })
 
     it('accept toc and checkout', () => {
-        checkOutB.checkout()
+        CheckOutB.Checkout()
     })
 
     it('enter wrong customer credential', () => {
-        Login.loginUser('tshering@gmai.com', 'tshering123')
+        Login.LoginUser('tshering@gmai.com', 'tshering123')
         cy.get('button').contains('Log in').click()
     })
 

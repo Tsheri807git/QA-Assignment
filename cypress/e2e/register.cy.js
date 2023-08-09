@@ -1,5 +1,5 @@
 import { RegisterNewuser } from "../pageObject/registerNewUser"
-import { editUserInfo } from "../pageObject/editUserDetail";
+import { EditUserInfo } from "../pageObject/editUserDetail";
 import { Login } from "../pageObject/loginPage";
 
 describe('Register new user', () => {
@@ -8,31 +8,32 @@ describe('Register new user', () => {
   })
 
   it('should register new user', () => {
-    RegisterNewuser.registerPage()
-    RegisterNewuser.registerUser('Tshering', 'Wangchuk', 'tshering1@gmail.com', 'Tshering@123', 'Tshering@123')
+    globalThis.email = RegisterNewuser.GenerateMail()
+    RegisterNewuser.RegisterPage()
+    RegisterNewuser.RegisterUser('Tshering', 'Wangchuk', email, 'Tshering@123', 'Tshering@123')
   })
   
   it('should have successfully', () => {
-    RegisterNewuser.saveNewUser()
+    RegisterNewuser.SaveNewUser()
   })
 
   it('User should login', () => {
     cy.get('a').contains('Continue').click()
-    Login.loginPage()
-    Login.loginUser('tshering1@gmail.com', 'Tshering@123')
+    Login.LoginPage()
+    Login.LoginUser(email, 'Tshering@123')
   })
 
   it('should have successfully', () => {
-  Login.loginNewUser()
+  Login.LoginNewUser()
   })
 
   it('should edit the customer info', () => {
-  editUserInfo.detailPage()
-  editUserInfo.personalDetail('Sonam', 'Tenzin', 'sonam@gmail.com')
+  EditUserInfo.DetailPage()
+  EditUserInfo.PersonalDetail('Sonam', 'Tenzin', 'sonam@gmail.com')
   })
 
   it('should have successfully', () => {
-  editUserInfo.saveInfo()
+  EditUserInfo.SaveInfo()
 
   })
 })

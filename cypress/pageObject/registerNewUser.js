@@ -1,10 +1,10 @@
 export class RegisterNewuser {
-    static registerPage() {
+    static RegisterPage() {
         cy.contains('Register').click()
         cy.get('h1').should('have.text', 'Register')
     }
 
-    static registerUser(firstName, lastName, email, password, passwordConfirm) {
+    static RegisterUser(firstName, lastName, email, password, passwordConfirm) {
         cy.get('#FirstName').clear().type(firstName)
         cy.get('#LastName').clear().type(lastName)
         cy.get('#Email').clear().type(email)
@@ -13,7 +13,12 @@ export class RegisterNewuser {
 
     }
 
-    static saveNewUser() {
+    static GenerateMail() {
+        const randomId = Cypress._.random(1e6)
+        return `tshering${randomId}@gmail.com` 
+    }
+
+    static SaveNewUser() {
         cy.get('button').contains('Register').click()
         cy.get('.result').should('have.text', 'Your registration completed')
     }
